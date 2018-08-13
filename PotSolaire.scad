@@ -1,3 +1,6 @@
+# CREPP 2018
+# GPL V3.0
+# yvoz.lg@gmail.com
 
 oe = 3; // épaisseur parois
 
@@ -17,6 +20,18 @@ jj = 0.5; // jeux charnière
 
 0w = pw/2; // centre du pot
 0z = bz/2+oe/2+j/2; // centre Z collier
+
+// -------------- Niveaux ( 3 nivaux )
+niv = 2;
+
+if(niv == 0){
+	pot();
+	translate([0, 0, pz-bz+j]) color("orange") collier();
+	translate([0w, 0w+(pw/2+j+oe+jj+chr), pz+j-bz+0z]) panosol();
+}
+if(niv==1) pot();
+if(niv==2) rotate([0,180,0]) color("orange") collier();
+if(niv==3) panosol();
 
 // --------------- Pot
 module pot() difference(){
@@ -114,17 +129,6 @@ module panosol(){
 		}
 	}
 }
-
-niv = 2;
-
-if(niv == 0){
-	pot();
-	translate([0, 0, pz-bz+j]) color("orange") collier();
-	translate([0w, 0w+(pw/2+j+oe+jj+chr), pz+j-bz+0z]) panosol();
-}
-if(niv==1) pot();
-if(niv==2) rotate([0,180,0]) color("orange") collier();
-if(niv==3) panosol();
 
 // surface d'impression 195*195
 //translate([-22,-22,155]) cube([195,195,1]);
