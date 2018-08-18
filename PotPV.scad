@@ -19,19 +19,31 @@ module pot(){
 
 dely = 10; // décalage de l'axe de charnière / au bord du pot
 delz = 25; // hauteur d'emboitement des coins sur le pot
-//translate([0,pvw/2+dely,60]) panosol();
-translate([0,0,0]) anglo();
+
+pot();
+translate([0,pvw/2+dely,pvz]) rotate([-40,0,0]) panosol();
+translate([-pvw/2-dely,0,pvz]) rotate([0,0,90]) rotate([-60,0,0]) panosol();
+translate([0,0,pvz-60]) anglo(false);
+
+
+// ########## rotate([0,180,0]) anglo();
 
 //---- anglo
-module anglo(){
+module anglo(print){
+	
+	// affichage de construction à conserver
 	//pyramide(pvw, pvw-18, 60);
-	//
+	//translate([0,pvw/2+dely,60]) panosol();
 
 	croisw = (pvw-chw)/2 +dely; // bord charnière jusqu'au coin
-	rotate([0,0,0]) gons();
-	rotate([0,0,90]) gons();
+	rotate([0,0,0]) gons(1);
+	rotate([0,0,90]) gons(0);
+	if(print==false){
+		rotate([0,0,180]) gons(1);
+		rotate([0,0,-90]) gons(0);
+	}
 	translate([-pvw/2-dely, pvw/2+dely, 60]) sphere(r=chr);
-	module gons(){ 
+	module gons(left){ 
 		difference(){
 			union(){
 				translate([0,pvw/2+dely,60]){
@@ -52,6 +64,14 @@ module anglo(){
 			translate([0,pvw/2+dely,60]){
 				translate([chw/2+jj, 0, 0]) rotate([0,90,0]) #cylinder(r=axr, h=croisw);
 				translate([-chw/2-jj, 0, 0]) rotate([0,-90,0]) #cylinder(r=axr, h=croisw);
+			}
+			// 
+			if(print){
+				if(left){
+					translate([20, 50, 0]) cube(150);
+				}else{
+					translate([-150, 0, 0]) cube(150);
+				}
 			}
 		}
 	}
