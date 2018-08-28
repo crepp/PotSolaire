@@ -1,3 +1,6 @@
+// CREPP 2018
+// GPL V3.0
+// yvoz.lg@gmail.com
 
 oe = 3.5+1;
 pir = 5;   // rayon interne des coins du pot
