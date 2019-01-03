@@ -99,11 +99,7 @@ module collier() difference(){
 // -------- Panosol
 
 module panosol(){
-	difference(){
-		translate([-chw/2, 0, 0]) rotate([0,90,0]) cylinder(r=chr, h=chw);
-		// vis axe de charnière
-		translate([-chw/2-1, 0, 0]) rotate([0,90,0]) cylinder(r=1.7, h=chw+2);
-	}
+    charpanosol();
 	//
 	decy = 4;
 	translate([0, 0, -chr]) {
@@ -133,6 +129,18 @@ module panosol(){
 			translate([-pox/2+6, decy+pob+pob+3, -1]) cube([25,12,oe*3]);
 		}
 	}
+}
+
+module charpanosol(jonc=0){	
+    difference(){
+		translate([-chw/2, 0, 0]) rotate([0,90,0]) cylinder(r=chr, h=chw);
+		// vis axe de charnière
+		translate([-chw/2-1, 0, 0]) rotate([0,90,0]) cylinder(r=1.7, h=chw+2);
+	}
+    // plaque de jonction
+    if(jonc){
+        translate([-chw/2, 0, -chr]) cube([chw, chw-porr*2, oe*2]);
+    }
 }
 
 
